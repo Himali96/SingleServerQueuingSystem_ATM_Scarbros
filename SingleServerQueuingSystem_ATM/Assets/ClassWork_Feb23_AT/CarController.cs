@@ -122,7 +122,6 @@ public class CarController : MonoBehaviour
         queueManager.PopFirst();
         ChangeState(CarState.Serviced);
         ChangeCarWaitingPosition();
-        Debug.Log("Count :: " + queueManager.queue.Count);
     }
 
     void ChangeCarWaitingPosition()
@@ -139,10 +138,7 @@ public class CarController : MonoBehaviour
 #endif
         if (other.gameObject.tag == "Car")
         {
-            if (queueManager.First() != this.gameObject &&
-            (queueManager.First().GetComponent<CarController>().carState == CarController.CarState.InService ||
-            queueManager.First().GetComponent<CarController>().carState == CarController.CarState.Waiting ||
-            queueManager.First().GetComponent<CarController>().carState == CarController.CarState.Entered))
+            if (queueManager.First() != this.gameObject)
             {
                 ChangeState(CarState.Waiting);
                 navMeshAgent.isStopped = true;
