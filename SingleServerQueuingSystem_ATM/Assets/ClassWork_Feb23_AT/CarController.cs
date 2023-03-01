@@ -19,6 +19,7 @@ public class CarController : MonoBehaviour
     {
         None=-1,
         Entered,  //going towards the DriveThruWindow (don't bump into fron cars)
+        Waiting,
         InService,
         Serviced
     }
@@ -51,6 +52,9 @@ public class CarController : MonoBehaviour
                 break;
             case CarState.Entered:
                 DoEntered();
+                break;
+            case CarState.Waiting:
+                DoWait();
                 break;
             case CarState.InService:
                 DoInService();
@@ -87,7 +91,19 @@ public class CarController : MonoBehaviour
 
         navMeshAgent.SetDestination(targetCar.position);
         navMeshAgent.isStopped = false;
+        if (queueManager.First() != this.gameObject && 
+            (queueManager.First().GetComponent<CarController>().carState == CarController.CarState.InService ||
+            queueManager.First().GetComponent<CarController>().carState == CarController.CarState.Entered))
+        {
+            this.ChangeState(CarState.Waiting);
+        }
     }
+
+    void DoWait()
+    {
+        Debug.Log("InWaiting");
+    }
+
     void DoInService()
     {
         navMeshAgent.isStopped = true;
@@ -96,8 +112,8 @@ public class CarController : MonoBehaviour
     }
     void DoServiced()
     {
-        navMeshAgent.SetDestination(targetExit.position);
         navMeshAgent.isStopped = false;
+        navMeshAgent.SetDestination(targetExit.position);
 
         Renderer r = GetComponent<Renderer>();
         r.material.color = Color.green;
@@ -111,19 +127,18 @@ public class CarController : MonoBehaviour
     public void FixedUpdate()
     {
 
-//        if (carState == CarState.Entered)
-//        {
-//            if (targetCar == null)
-//            {
-//#if DEBUG_CC
-//            print("***** CarController.FixedUpdate:targetCar.pos=" + targetCar.position);
-//#endif
-//                targetCar = targetWindow;
-//                //navMeshAgent.SetDestination(targetCar.position);
-//                navMeshAgent.isStopped = false;
-//            }
-//        }
-
+        //        if (carState == CarState.Entered)
+        //        {
+        //            if (targetCar == null)
+        //            {
+        //#if DEBUG_CC
+        //            print("***** CarController.FixedUpdate:targetCar.pos=" + targetCar.position);
+        //#endif
+        //                targetCar = targetWindow;
+        //                //navMeshAgent.SetDestination(targetCar.position);
+        //                navMeshAgent.isStopped = false;
+        //            }
+        //        }
     }
     public void SetInService(bool value)
     {
@@ -139,10 +154,23 @@ public class CarController : MonoBehaviour
         
         queueManager.PopFirst();
         ChangeState(CarState.Serviced);
+        ChangeCarWaitingPosition();
         //targetExit = target;
 
         //navMeshAgent.SetDestination(target.position);
         //navMeshAgent.isStopped = false;
+    }
+
+    void ChangeCarWaitingPosition()
+    {
+        if (queueManager.First().GetComponent<CarController>().carState == CarState.Serviced)
+        {
+            queueManager.PopFirst();
+            ChangeCarWaitingPosition();
+        }
+            GameObject go = queueManager.First();
+            go.GetComponent<CarController>().ChangeState(CarState.Entered);
+            go.GetComponent<CarController>().navMeshAgent.isStopped = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -155,9 +183,15 @@ public class CarController : MonoBehaviour
             //this.navMeshAgent.desiredVelocity.
             //if (targetCar == null)
             //{
-                //targetCar = other.gameObject.transform;
-                //navMeshAgent.SetDestination(targetCar.position);
+            //targetCar = other.gameObject.transform;
+            //navMeshAgent.SetDestination(targetCar.position);
             //}
+            if (queueManager.First() != this.gameObject &&
+            (queueManager.First().GetComponent<CarController>().carState == CarController.CarState.InService ||
+            queueManager.First().GetComponent<CarController>().carState == CarController.CarState.Entered))
+            {
+                navMeshAgent.isStopped = true;
+            }
         }
         else if (other.gameObject.tag == "DriveThruWindow")
         {
@@ -170,8 +204,14 @@ public class CarController : MonoBehaviour
         }
     }
 
-
-    private void OnDrawGizmos()
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Car")
+        {
+            navMeshAgent.isStopped = false;
+        }
+    }
+        private void OnDrawGizmos()
     {
 #if DEBUG_CC
         print("InCC.OnDrawGizmos:targetCar.ID=" + targetCar.gameObject.GetInstanceID());

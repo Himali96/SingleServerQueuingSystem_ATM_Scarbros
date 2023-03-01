@@ -8,6 +8,7 @@ public class ArrivalProcess : MonoBehaviour
 
     public GameObject carPrefab;
     public Transform carSpawnPlace;
+    public Transform carParent;
 
     public float arrivalRateAsCarsPerHour = 20; // car/hour
     public float interArrivalTimeInHours; // = 1.0 / arrivalRateAsCarsPerHour;
@@ -59,7 +60,7 @@ public class ArrivalProcess : MonoBehaviour
     {
         while (generateArrivals)
         {
-            GameObject carGO=Instantiate(carPrefab, carSpawnPlace.position, Quaternion.identity);
+            GameObject carGO=Instantiate(carPrefab, carSpawnPlace.position, Quaternion.identity, carParent);
             //if (queueManager.Count() > 0)
             //{
             //    queueManager.Add(carGO);

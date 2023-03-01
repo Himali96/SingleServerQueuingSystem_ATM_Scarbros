@@ -5,7 +5,7 @@ using UnityEngine;
 public class QueueManager : MonoBehaviour
 {
     //Queue<GameObject> queue = new Queue<GameObject>();
-    List<GameObject> queue = new List<GameObject>();
+    public List<GameObject> queue = new List<GameObject>();
     LinkedList<GameObject> q = new LinkedList<GameObject>();
     
 
