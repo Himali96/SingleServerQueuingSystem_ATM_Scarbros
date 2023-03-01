@@ -99,8 +99,8 @@ public class CarController : MonoBehaviour
     }
     void DoServiced()
     {
-        navMeshAgent.SetDestination(targetExit.position);
         navMeshAgent.isStopped = false;
+        navMeshAgent.SetDestination(targetExit.position);
 
         Renderer r = GetComponent<Renderer>();
         r.material.color = Color.green;
@@ -127,12 +127,6 @@ public class CarController : MonoBehaviour
 
     void ChangeCarWaitingPosition()
     {
-        if (queueManager.First().GetComponent<CarController>().carState == CarState.Serviced)
-        {
-            queueManager.PopFirst();
-            ChangeCarWaitingPosition();
-        }
-
         GameObject go = queueManager.First();
         go.GetComponent<CarController>().ChangeState(CarState.Entered);
         go.GetComponent<CarController>().navMeshAgent.isStopped = false;
@@ -147,6 +141,7 @@ public class CarController : MonoBehaviour
         {
             if (queueManager.First() != this.gameObject &&
             (queueManager.First().GetComponent<CarController>().carState == CarController.CarState.InService ||
+            queueManager.First().GetComponent<CarController>().carState == CarController.CarState.Waiting ||
             queueManager.First().GetComponent<CarController>().carState == CarController.CarState.Entered))
             {
                 ChangeState(CarState.Waiting);
