@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class QueueManager : MonoBehaviour
 {
@@ -32,7 +33,10 @@ public class QueueManager : MonoBehaviour
     }
     public void Add(GameObject gameObject)
     {
+        if (queue.Contains(gameObject))
+            return;
         queue.Add(gameObject);
+        print("Added");
 #if DEBUG_QM
         print("**** QueueManager.Add:ID=" + gameObject.GetInstanceID() + ", Count="+queue.Count+" ****");
 #endif
@@ -44,6 +48,7 @@ public class QueueManager : MonoBehaviour
         {
             go = queue[0];
             queue.RemoveAt(0);
+            queue = queue.Distinct().ToList(); // I have added this to remove duplication
         }
         return go;
     }

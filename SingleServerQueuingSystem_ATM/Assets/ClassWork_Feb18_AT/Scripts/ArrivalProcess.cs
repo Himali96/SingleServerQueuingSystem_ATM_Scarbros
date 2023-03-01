@@ -10,6 +10,7 @@ public class ArrivalProcess : MonoBehaviour
     public Transform carSpawnPlace;
     public Transform carParent;
 
+    public int maxNumberOfCarInQueue = 10;
     public float arrivalRateAsCarsPerHour = 20; // car/hour
     public float interArrivalTimeInHours; // = 1.0 / arrivalRateAsCarsPerHour;
     private float interArrivalTimeInMinutes;
@@ -60,7 +61,10 @@ public class ArrivalProcess : MonoBehaviour
     {
         while (generateArrivals)
         {
-            GameObject carGO=Instantiate(carPrefab, carSpawnPlace.position, Quaternion.identity, carParent);
+            if (queueManager.queue.Count < maxNumberOfCarInQueue)
+            {
+                GameObject carGO = Instantiate(carPrefab, carSpawnPlace.position, Quaternion.identity, carParent);
+            }
             //if (queueManager.Count() > 0)
             //{
             //    queueManager.Add(carGO);
