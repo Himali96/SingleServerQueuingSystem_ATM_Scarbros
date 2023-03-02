@@ -24,4 +24,9 @@ public class ServicetimerTxt : MonoBehaviour
         timerTxt.SetText($"{ts.Minutes:00}:{ts.Seconds:00}");
         customers.text = service.customersCont.ToString();
     }
+
+    public void ChangeSpeed(float v)
+    {
+        Time.timeScale = v;
+    }
 }

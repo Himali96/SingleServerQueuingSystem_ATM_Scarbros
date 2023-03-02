@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//New as of Feb.25rd
 
 public class ServiceProcess : MonoBehaviour
 {
@@ -13,12 +12,9 @@ public class ServiceProcess : MonoBehaviour
     private float interServiceTimeInMinutes;
     private float interServiceTimeInSeconds;
 
-    //public float ServiceRateAsCarsPerHour = 20; // car/hour
     public bool generateServices = false;
 
-    //New as of Feb.23rd
     //Simple generation distribution - Uniform(min,max)
-    //
     public float minInterServiceTimeInSeconds = 3;
     public float maxInterServiceTimeInSeconds = 60;
     //
@@ -26,8 +22,6 @@ public class ServiceProcess : MonoBehaviour
 
     [System.NonSerialized] public float currentServiceTimer;
 
-    //New as Feb.25th
-    //CarController carController;
     QueueManager queueManager; //=new QueueManager();
 
     public enum ServiceIntervalTimeStrategy
@@ -47,9 +41,6 @@ public class ServiceProcess : MonoBehaviour
         interServiceTimeInHours = 1.0f / serviceRateAsCarsPerHour;
         interServiceTimeInMinutes = interServiceTimeInHours * 60;
         interServiceTimeInSeconds = interServiceTimeInMinutes * 60;
-        //queueManager = this.GetComponent<QueueManager>();
-        //queueManager = new QueueManager();
-        //StartCoroutine(GenerateServices());
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -62,13 +53,7 @@ public class ServiceProcess : MonoBehaviour
             CarController car = other.gameObject.GetComponent<CarController>();
             car.SetInService(true);
 
-            //if (queueManager.Count() == 0)
-            //{
-            //    queueManager.Add(carInService);
-            //}
-            Debug.Log("Collided with car");
             generateServices = true;
-            //carController = carInService.GetComponent<CarController>();
             StartCoroutine(GenerateServices(car));
         }
     }
@@ -77,7 +62,6 @@ public class ServiceProcess : MonoBehaviour
     {
         //while (generateServices)
         {
-            //Instantiate(carPrefab, carSpawnPlace.position, Quaternion.identity);
             float timeToNextServiceInSec = interServiceTimeInSeconds;
             switch (serviceIntervalTimeStrategy)
             {
@@ -102,30 +86,12 @@ public class ServiceProcess : MonoBehaviour
             }
             currentServiceTimer = timeToNextServiceInSec + 1f;
 
-            //New as of Feb.23rd
-            //float timeToNextServiceInSec = Random.Range(minInterServiceTimeInSeconds,maxInterServiceTimeInSeconds);
-           // generateServices = false;
-           Debug.Log(carInService + " time: " + timeToNextServiceInSec, carInService);
+            Debug.Log(carInService + " time: " + timeToNextServiceInSec, carInService);
             yield return new WaitForSeconds(timeToNextServiceInSec);
-
-            //yield return new WaitForSeconds(interServiceTimeInSeconds);
         }
         
         carInService.ExitService(carExitPlace);
         customersCont++;        
-    }
-
-    private void OnDrawGizmos()
-    {
-        //BoxCollidercarInService.GetComponent<BoxCollider>
-        // if (carInService)
-        // {
-        //     Renderer r = carInService.GetComponent<Renderer>();
-        //     r.material.color = Color.green;
-
-        // }
-
-
     }
 
 }

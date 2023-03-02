@@ -65,10 +65,6 @@ public class ArrivalProcess : MonoBehaviour
             {
                 GameObject carGO = Instantiate(carPrefab, carSpawnPlace.position, Quaternion.identity, carParent);
             }
-            //if (queueManager.Count() > 0)
-            //{
-            //    queueManager.Add(carGO);
-            //} //The first car as added in the queue when in DriveThruWindow
 
             float timeToNextArrivalInSec = interArrivalTimeInSeconds;
             switch (arrivalIntervalTimeStrategy)
@@ -93,12 +89,8 @@ public class ArrivalProcess : MonoBehaviour
 
             }
 
-            //New as of Feb.23rd
             //float timeToNextArrivalInSec = Random.Range(minInterArrivalTimeInSeconds,maxInterArrivalTimeInSeconds);
             yield return new WaitForSeconds(timeToNextArrivalInSec);
-
-            //yield return new WaitForSeconds(interArrivalTimeInSeconds);
-
         }
 
     }
