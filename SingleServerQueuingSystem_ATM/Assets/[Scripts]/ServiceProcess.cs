@@ -77,7 +77,6 @@ public class ServiceProcess : MonoBehaviour
         {
             //Instantiate(carPrefab, carSpawnPlace.position, Quaternion.identity);
             float timeToNextServiceInSec = interServiceTimeInSeconds;
-            currentServiceTimer = timeToNextServiceInSec;
             switch (serviceIntervalTimeStrategy)
             {
                 case ServiceIntervalTimeStrategy.ConstantIntervalTime:
@@ -99,6 +98,7 @@ public class ServiceProcess : MonoBehaviour
                     break;
 
             }
+            currentServiceTimer = timeToNextServiceInSec;
 
             //New as of Feb.23rd
             //float timeToNextServiceInSec = Random.Range(minInterServiceTimeInSeconds,maxInterServiceTimeInSeconds);
