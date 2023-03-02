@@ -50,6 +50,7 @@ public class QueueManager : MonoBehaviour
             queue.RemoveAt(0);
             queue = queue.Distinct().ToList(); // I have added this to remove duplication
         }
+        Debug.Log("Poping out =>" + queue.Count);
         return go;
     }
     public int Count()

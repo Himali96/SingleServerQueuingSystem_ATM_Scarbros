@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 public class CarController : MonoBehaviour
 {
@@ -75,7 +75,7 @@ public class CarController : MonoBehaviour
 
         queueManager = GameObject.FindGameObjectWithTag("DriveThruWindow").GetComponent<QueueManager>();
         queueManager.Add(this.gameObject);
-
+        Debug.Log("Entered -> " + queueManager.Count());
         navMeshAgent.SetDestination(targetCar.position);
         navMeshAgent.isStopped = false;
         if (queueManager.First() != this.gameObject && 
@@ -121,11 +121,13 @@ public class CarController : MonoBehaviour
         
         queueManager.PopFirst();
         ChangeState(CarState.Serviced);
+        Debug.Log("Service done=> " + queueManager.Count());
         ChangeCarWaitingPosition();
     }
 
     void ChangeCarWaitingPosition()
     {
+        Debug.Log("Change positions");
         GameObject go = queueManager.First();
         go.GetComponent<CarController>().ChangeState(CarState.Entered);
         go.GetComponent<CarController>().navMeshAgent.isStopped = false;

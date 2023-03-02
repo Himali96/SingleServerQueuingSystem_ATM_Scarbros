@@ -858,7 +858,7 @@ MonoBehaviour:
   carSpawnPlace: {fileID: 925813516}
   carParent: {fileID: 1758714217}
   maxNumberOfCarInQueue: 10
-  arrivalRateAsCarsPerHour: 150
+  arrivalRateAsCarsPerHour: 1000
   interArrivalTimeInHours: 0
   generateArrivals: 1
   minInterArrivalTimeInSeconds: 3
@@ -1542,8 +1542,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carExitPlace: {fileID: 903346710}
-  serviceRateAsCarsPerHour: 200
-  interServiceTimeInHours: 0
+  serviceRateAsCarsPerHour: 50
+  interServiceTimeInHours: 0.002
   generateServices: 1
   minInterServiceTimeInSeconds: 5
   maxInterServiceTimeInSeconds: 30

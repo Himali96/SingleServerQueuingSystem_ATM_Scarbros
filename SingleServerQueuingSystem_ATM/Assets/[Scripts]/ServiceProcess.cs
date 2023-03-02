@@ -62,7 +62,7 @@ public class ServiceProcess : MonoBehaviour
             //{
             //    queueManager.Add(carInService);
             //}
-            
+            Debug.Log("Collided with car");
             generateServices = true;
             //carController = carInService.GetComponent<CarController>();
             StartCoroutine(GenerateServices(car));
@@ -107,6 +107,7 @@ public class ServiceProcess : MonoBehaviour
         }
         carInService.ExitService(carExitPlace);
     }
+
     private void OnDrawGizmos()
     {
         //BoxCollidercarInService.GetComponent<BoxCollider>
