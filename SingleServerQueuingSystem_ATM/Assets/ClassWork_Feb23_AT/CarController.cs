@@ -11,6 +11,7 @@ public class CarController : MonoBehaviour
     public Transform targetWindow;
     public Transform targetCar=null;
     public Transform targetExit = null;
+    public GameObject happyFace;
 
     public bool InService { get; set; }
     public GameObject driveThruWindow;
@@ -98,12 +99,13 @@ public class CarController : MonoBehaviour
         //this.transform.rotation = Quaternion.identity;
     }
     void DoServiced()
-    {
+    {        
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(targetExit.position);
 
         Renderer r = GetComponent<Renderer>();
         r.material.color = Color.green;
+        //happyFace.SetActive(true);
     }
     public void ChangeState(CarState newCarState)
     {
