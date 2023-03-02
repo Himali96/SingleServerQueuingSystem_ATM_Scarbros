@@ -16,10 +16,8 @@ public class ArrivalProcess : MonoBehaviour
     private float interArrivalTimeInMinutes;
     private float interArrivalTimeInSeconds;
 
-    //public float arrivalRateAsCarsPerHour = 20; // car/hour
     public bool generateArrivals = true;
 
-    //New as of Feb.23rd
     //Simple generation distribution - Uniform(min,max)
     //
     public float minInterArrivalTimeInSeconds = 3; 
@@ -35,7 +33,6 @@ public class ArrivalProcess : MonoBehaviour
 
     public ArrivalIntervalTimeStrategy arrivalIntervalTimeStrategy=ArrivalIntervalTimeStrategy.UniformIntervalTime;
 
-    //New as of Feb.25th
     QueueManager queueManager;
 
     //UI debugging
