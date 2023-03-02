@@ -6,6 +6,7 @@ public class ServicetimerTxt : MonoBehaviour
 {
     TextMeshProUGUI timerTxt;
     ServiceProcess service;
+    public TMP_Text customers;
 
     // Start is called before the first frame update
     void Start()
@@ -22,5 +23,6 @@ public class ServicetimerTxt : MonoBehaviour
         
         TimeSpan ts = TimeSpan.FromSeconds(service.currentServiceTimer);
         timerTxt.SetText($"{ts.Minutes:00}:{ts.Seconds:00}");
+        customers.text = service.customersCont.ToString();
     }
 }

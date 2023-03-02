@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
 using System.Threading.Tasks;
+using TMPro;
 
 public class CarController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class CarController : MonoBehaviour
     public Transform targetWindow;
     public Transform targetCar=null;
     public Transform targetExit = null;
-    public GameObject happyFace;
+    public GameObject happyFace;    
 
     public bool InService { get; set; }
     public GameObject driveThruWindow;
@@ -28,7 +29,7 @@ public class CarController : MonoBehaviour
     public CarState carState = CarState.None;
     // Start is called before the first frame update
     void Start()
-    {
+    {        
         driveThruWindow = GameObject.FindGameObjectWithTag("DriveThruWindow");
         targetWindow = driveThruWindow.transform;
         targetExit = GameObject.FindGameObjectWithTag("CarExit").transform;
@@ -105,7 +106,7 @@ public class CarController : MonoBehaviour
 
         Renderer r = GetComponent<Renderer>();
         r.material.color = Color.green;
-        //happyFace.SetActive(true);
+        happyFace.SetActive(true);
     }
     public void ChangeState(CarState newCarState)
     {
@@ -124,7 +125,7 @@ public class CarController : MonoBehaviour
         queueManager.PopFirst();
         ChangeState(CarState.Serviced);
         Debug.Log("Service done=> " + queueManager.Count());
-        ChangeCarWaitingPosition();
+        ChangeCarWaitingPosition();        
     }
 
     void ChangeCarWaitingPosition()

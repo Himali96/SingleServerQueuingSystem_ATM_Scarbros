@@ -22,6 +22,7 @@ public class ServiceProcess : MonoBehaviour
     public float minInterServiceTimeInSeconds = 3;
     public float maxInterServiceTimeInSeconds = 60;
     //
+    public int customersCont;
 
     [System.NonSerialized] public float currentServiceTimer;
 
@@ -42,6 +43,7 @@ public class ServiceProcess : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        customersCont = 0;
         interServiceTimeInHours = 1.0f / serviceRateAsCarsPerHour;
         interServiceTimeInMinutes = interServiceTimeInHours * 60;
         interServiceTimeInSeconds = interServiceTimeInMinutes * 60;
@@ -109,6 +111,7 @@ public class ServiceProcess : MonoBehaviour
             //yield return new WaitForSeconds(interServiceTimeInSeconds);
         }
         carInService.ExitService(carExitPlace);
+        customersCont++;        
     }
 
     private void OnDrawGizmos()
