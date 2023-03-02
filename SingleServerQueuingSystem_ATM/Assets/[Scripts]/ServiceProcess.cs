@@ -23,6 +23,8 @@ public class ServiceProcess : MonoBehaviour
     public float maxInterServiceTimeInSeconds = 60;
     //
 
+    [System.NonSerialized] public float currentServiceTimer;
+
     //New as Feb.25th
     //CarController carController;
     QueueManager queueManager; //=new QueueManager();
@@ -75,6 +77,7 @@ public class ServiceProcess : MonoBehaviour
         {
             //Instantiate(carPrefab, carSpawnPlace.position, Quaternion.identity);
             float timeToNextServiceInSec = interServiceTimeInSeconds;
+            currentServiceTimer = timeToNextServiceInSec;
             switch (serviceIntervalTimeStrategy)
             {
                 case ServiceIntervalTimeStrategy.ConstantIntervalTime:
