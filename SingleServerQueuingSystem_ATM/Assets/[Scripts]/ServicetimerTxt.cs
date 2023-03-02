@@ -4,14 +4,13 @@ using TMPro;
 
 public class ServicetimerTxt : MonoBehaviour
 {
-    TextMeshProUGUI timerTxt;
+    [SerializeField] TextMeshProUGUI timerTxt;
     ServiceProcess service;
-    public TMP_Text customers;
+    [SerializeField] TMP_Text customers;
 
     // Start is called before the first frame update
     void Start()
     {
-        timerTxt = GetComponent<TextMeshProUGUI>();
         service = GameObject.FindWithTag("DriveThruWindow").GetComponent<ServiceProcess>();
     }
     

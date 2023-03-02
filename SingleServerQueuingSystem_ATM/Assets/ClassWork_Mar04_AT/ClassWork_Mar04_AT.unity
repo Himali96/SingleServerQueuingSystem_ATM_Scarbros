@@ -487,7 +487,6 @@ GameObject:
   - component: {fileID: 207648086}
   - component: {fileID: 207648089}
   - component: {fileID: 207648088}
-  - component: {fileID: 207648087}
   m_Layer: 5
   m_Name: Customers
   m_TagString: Untagged
@@ -515,18 +514,6 @@ RectTransform:
   m_AnchoredPosition: {x: 102.4, y: -64}
   m_SizeDelta: {x: 95.401, y: 33.243}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &207648087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 207648085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d699bfe38aa469548b9e015e3b47cadf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &207648088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4139,6 +4126,7 @@ MonoBehaviour:
   generateServices: 1
   minInterServiceTimeInSeconds: 5
   maxInterServiceTimeInSeconds: 30
+  customersCont: 0
   serviceIntervalTimeStrategy: 2
 --- !u!114 &1741770769
 MonoBehaviour:
@@ -5262,7 +5250,6 @@ GameObject:
   - component: {fileID: 899393221043065174}
   - component: {fileID: 899393221043065173}
   - component: {fileID: 899393221043065172}
-  - component: {fileID: 899393221043065175}
   m_Layer: 5
   m_Name: Service timer Txt
   m_TagString: Untagged
@@ -5387,18 +5374,6 @@ RectTransform:
   m_AnchoredPosition: {x: 102.4, y: -15.999989}
   m_SizeDelta: {x: 95.401, y: 33.243}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &899393221043065175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 899393221043065169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d699bfe38aa469548b9e015e3b47cadf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &899393221517244425
 GameObject:
   m_ObjectHideFlags: 0
@@ -5493,6 +5468,7 @@ GameObject:
   - component: {fileID: 899393221704183755}
   - component: {fileID: 899393221704183754}
   - component: {fileID: 899393221704183749}
+  - component: {fileID: 899393221704183756}
   m_Layer: 5
   m_Name: Canvas (1)
   m_TagString: Untagged
@@ -5582,6 +5558,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &899393221704183756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899393221704183748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d699bfe38aa469548b9e015e3b47cadf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerTxt: {fileID: 899393221043065172}
+  customers: {fileID: 207648088}
 --- !u!1 &899393221837982832
 GameObject:
   m_ObjectHideFlags: 0

@@ -100,7 +100,7 @@ public class ServiceProcess : MonoBehaviour
                     break;
 
             }
-            currentServiceTimer = timeToNextServiceInSec;
+            currentServiceTimer = timeToNextServiceInSec + 1f;
 
             //New as of Feb.23rd
             //float timeToNextServiceInSec = Random.Range(minInterServiceTimeInSeconds,maxInterServiceTimeInSeconds);
@@ -110,6 +110,7 @@ public class ServiceProcess : MonoBehaviour
 
             //yield return new WaitForSeconds(interServiceTimeInSeconds);
         }
+        
         carInService.ExitService(carExitPlace);
         customersCont++;        
     }
